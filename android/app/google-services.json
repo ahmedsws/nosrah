@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "348577448582",
+    "project_id": "nosrah-44f47",
+    "storage_bucket": "nosrah-44f47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348577448582:android:0d62955868c3e598bc4707",
+        "android_client_info": {
+          "package_name": "com.example.nosrah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348577448582-ahl44nrt5g78fh66n9294t0otufpdsfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJwwkM1w_OQscFsWKIQJ96xVJccR3X4zk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348577448582-ahl44nrt5g78fh66n9294t0otufpdsfc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348577448582:android:cab5666eb3383646bc4707",
+        "android_client_info": {
+          "package_name": "com.qalam.nosrah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348577448582-ahl44nrt5g78fh66n9294t0otufpdsfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJwwkM1w_OQscFsWKIQJ96xVJccR3X4zk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348577448582-ahl44nrt5g78fh66n9294t0otufpdsfc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
