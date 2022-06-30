@@ -22,8 +22,8 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       return HadeethModel.fromJson(data);
     } else {
       return HadeethModel.fromJson({
-        'almatn':
-            'إنَّ رُوحَ القُدُسِ لا يزالُ يُؤيِّدُك ما نافَحْتَ عنِ اللهِ وعن رسولِه'
+        'almatn': 'إن روح القدس لا يزال يؤيدك ما نافحت عن الله ورسوله',
+        'source': 'صحيح مسلم'
       });
     }
   }
@@ -39,6 +39,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       return documentsSnapshot.map(
         (doc) {
           final data = doc.data();
+
           return HashtagModel.fromJson(data);
         },
       ).toList();

@@ -14,18 +14,13 @@ class HomePage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  // final String quote;
-  // 'إنَّ رُوحَ القُدُسِ لا يزالُ يُؤيِّدُك ما نافَحْتَ عنِ اللهِ وعن رسولِه';
-
   final NotificationRepository notificationRepository =
       NotificationRepositoryImpl();
-
-  final boycottDays = DateTime.now().difference(DateTime(2020, 10, 27)).inDays;
 
   @override
   Widget build(BuildContext context) {
     final secondrayColor = Theme.of(context).colorScheme.secondary;
-    // final hashtag = 'مقاطعه_المنتجات_الفرنسيه$boycottDays';
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -126,22 +121,22 @@ class HomePage extends StatelessWidget {
                                       color:
                                           Theme.of(context).colorScheme.primary,
                                     ),
-                                // children: [
-                                // TextSpan(
-                                //   text: '\nتخريج صحيح ابن حبان',
-                                //   style: Theme.of(context)
-                                //       .textTheme
-                                //       .bodyMedium!
-                                //       .copyWith(
-                                //         fontSize: 20.sp,
-                                //         color: Theme.of(context)
-                                //             .colorScheme
-                                //             .primary
-                                //             .withOpacity(.76),
-                                //         height: 3,
-                                //       ),
-                                // ),
-                                // ],
+                                children: [
+                                  TextSpan(
+                                    text: '\n${homeState.hadeeth!.source}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          fontSize: 20.sp,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                              .withOpacity(.76),
+                                          height: 3,
+                                        ),
+                                  ),
+                                ],
                               ),
                               textDirection: TextDirection.rtl,
                             )
