@@ -83,6 +83,11 @@ void main() async {
   final String? date = prefs.getString('notification_time');
   if (date == null) {
     await notificationRepository.scheduleNotification();
+
+    await prefs.setString(
+      'notification_time',
+      date.toString(),
+    );
   }
 
   runApp(const AppBase());

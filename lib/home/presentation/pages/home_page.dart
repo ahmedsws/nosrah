@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nosrah/home/domain/entities/hashtag.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_share/social_share.dart';
 
@@ -39,7 +40,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
                   DatePicker.showTime12hPicker(
                     context,
                     locale: LocaleType.ar,
@@ -54,13 +56,14 @@ class HomePage extends StatelessWidget {
                       await notificationRepository.scheduleNotification(
                           time: date);
 
-                      final prefs = await SharedPreferences.getInstance();
                       await prefs.setString(
                         'notification_time',
                         date.toString(),
                       );
                     },
-                    currentTime: DateTime.now(),
+                    currentTime: DateTime.parse(
+                      prefs.getString('notification_time')!,
+                    ),
                   );
                 },
                 child: Text(
@@ -112,7 +115,8 @@ class HomePage extends StatelessWidget {
                       return homeState is HomeLoaded
                           ? SelectableText.rich(
                               TextSpan(
-                                text: '${homeState.hadeeth!.almatn}.',
+                                text: '''${homeState.hadeeth!.almatn}.
+                                ''',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -190,6 +194,8 @@ class HomePage extends StatelessWidget {
                     ),
                     onPressed: () async {
                       if (homeState is HomeLoaded) {
+                        String tweetText = homeState.hadeeth!.almatn;
+
                         final hashtags = homeState.hashtags!
                           ..sort(
                             (hashtag1, hashtag2) => hashtag1.priority.compareTo(
@@ -197,12 +203,18 @@ class HomePage extends StatelessWidget {
                             ),
                           );
 
-                        List<String> hashtagsTexts =
-                            hashtags.map((hashtag) => hashtag.text).toList();
+                        final List<String> hashtagsTexts = [];
+                        hashtags.forEach((hashtag) {
+                          if (tweetText.length + hashtag.text.length <= 280) {
+                            tweetText += hashtag.text;
 
+                            hashtagsTexts.add(hashtag.text);
+                          }
+                        });
+
+                        // TODO: share on facebook
                         await SocialShare.shareTwitter(
-                          '''${homeState.hadeeth!.almatn}
-                          ''',
+                          '''"${homeState.hadeeth!.almatn}"''',
                           hashtags: hashtagsTexts,
                         );
                       }

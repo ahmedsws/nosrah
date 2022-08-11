@@ -36,7 +36,9 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     final documentsSnapshot = hashtags.docs;
 
     if (documentsSnapshot.isNotEmpty) {
-      return documentsSnapshot.map(
+      return documentsSnapshot
+          .where((doc) => doc.data()['is_active'] == true)
+          .map(
         (doc) {
           final data = doc.data();
 

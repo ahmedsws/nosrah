@@ -26,7 +26,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             ),
           );
         } catch (e) {
-          return emit(HomeError());
+          return emit(
+            const HomeLoaded(
+              hadeeth: Hadeeth(
+                almatn: 'إن روح القدس لا يزال يؤيدك ما نافحت عن الله ورسوله',
+                source: 'صحيح مسلم',
+              ),
+              hashtags: [],
+            ),
+          );
         }
       },
     );
