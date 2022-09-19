@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../home/application/bloc/home_bloc.dart';
-import '../../../home/presentation/pages/home_page.dart';
+import '../../../features/home/application/bloc/home_bloc.dart';
+import '../../../features/home/presentation/pages/home_page.dart';
 
 class AppBase extends StatelessWidget {
   const AppBase({Key? key}) : super(key: key);

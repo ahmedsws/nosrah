@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:nosrah/notification/domain/repositories/notification_repository.dart';
-import 'package:nosrah/notification/infrastructure/repositories/notification_repository_impl.dart';
+import 'package:nosrah/features/notification/domain/repositories/notification_repository.dart';
+import 'package:nosrah/features/notification/infrastructure/repositories/notification_repository_impl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/presentation/pages/app_base.dart';
@@ -83,11 +83,6 @@ void main() async {
   final String? date = prefs.getString('notification_time');
   if (date == null) {
     await notificationRepository.scheduleNotification();
-
-    await prefs.setString(
-      'notification_time',
-      date.toString(),
-    );
   }
 
   runApp(const AppBase());
