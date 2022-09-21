@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nosrah/features/home/presentation/widgets/menu_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_share/social_share.dart';
-import '../../../notification/domain/repositories/notification_repository.dart';
-import '../../../notification/infrastructure/repositories/notification_repository_impl.dart';
 import '../../application/bloc/home_bloc.dart';
-import '../../../ansar_magazine/presentation/pages/ansar_magazine_page.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({
+  const HomePage({
     Key? key,
   }) : super(key: key);
+
+  final String prophetSaid = 'قال رسول الله ﷺ: ';
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +26,10 @@ class HomePage extends StatelessWidget {
           centerTitle: true,
           title: Image.asset(
             'assets/images/muhammad_peace_be_upon_him.png',
-            width: 66.25.w,
-            height: 52.31.h,
+            width: 50.25.w,
+            height: 37.31.h,
           ),
-          backgroundColor: const Color(0xFF0C262B).withOpacity(.2),
+          backgroundColor: const Color(0xFF163036),
         ),
         body: Stack(
           alignment: Alignment.center,
@@ -52,6 +49,23 @@ class HomePage extends StatelessWidget {
                 children: [
                   Align(
                     alignment: Alignment.topRight,
+                    child: Text(
+                      prophetSaid,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontSize: 20.sp,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(.76),
+                            height: 3,
+                          ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
                     child: Image.asset(
                       'assets/images/quote.png',
                       width: 34.w,
@@ -65,8 +79,7 @@ class HomePage extends StatelessWidget {
                       return homeState is HomeLoaded
                           ? SelectableText.rich(
                               TextSpan(
-                                text: '''${homeState.hadeeth!.almatn}.
-                                ''',
+                                text: '${homeState.hadeeth!.almatn}\n',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -121,10 +134,12 @@ class HomePage extends StatelessWidget {
                 builder: (context, homeState) {
                   return ElevatedButton(
                     style: ButtonStyle(
-                      maximumSize: MaterialStateProperty.all(Size(178.w, 44.h)),
+                      fixedSize: MaterialStateProperty.all(
+                        Size(MediaQuery.of(context).size.width - 50, 50.h),
+                      ),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.r),
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
                       ),
                       backgroundColor: MaterialStateProperty.all(
@@ -144,7 +159,8 @@ class HomePage extends StatelessWidget {
                     ),
                     onPressed: () async {
                       if (homeState is HomeLoaded) {
-                        String tweetText = homeState.hadeeth!.almatn;
+                        String tweetText =
+                            prophetSaid + homeState.hadeeth!.almatn;
 
                         final hashtags = homeState.hashtags!
                           ..sort(
@@ -154,17 +170,21 @@ class HomePage extends StatelessWidget {
                           );
 
                         final List<String> hashtagsTexts = [];
-                        hashtags.forEach((hashtag) {
-                          if (tweetText.length + hashtag.text.length <= 280) {
-                            tweetText += hashtag.text;
+                        hashtags.forEach(
+                          (hashtag) {
+                            // 4 is the count of characters(" + " +  + #) in the tweet
+                            if (tweetText.length + hashtag.text.length + 4 <=
+                                280) {
+                              tweetText += '#${hashtag.text}';
 
-                            hashtagsTexts.add(hashtag.text);
-                          }
-                        });
+                              hashtagsTexts.add(hashtag.text);
+                            }
+                          },
+                        );
 
                         // TODO: share on facebook
                         await SocialShare.shareTwitter(
-                          '''"${homeState.hadeeth!.almatn}"''',
+                          '''$prophetSaid"${homeState.hadeeth!.almatn}"''',
                           hashtags: hashtagsTexts,
                         );
                       }

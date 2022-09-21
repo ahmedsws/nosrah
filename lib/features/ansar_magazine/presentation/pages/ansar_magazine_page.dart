@@ -23,10 +23,10 @@ class AnsarMagazinePage extends StatelessWidget {
             centerTitle: true,
             title: Image.asset(
               'assets/images/muhammad_peace_be_upon_him.png',
-              width: 66.25.w,
-              height: 52.31.h,
+              width: 50.25.w,
+              height: 37.31.h,
             ),
-            backgroundColor: const Color(0xFF0C262B),
+            backgroundColor: const Color(0xFF163036),
           ),
           body: Stack(
             alignment: Alignment.center,
